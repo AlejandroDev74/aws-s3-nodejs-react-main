@@ -27,8 +27,8 @@ let s3 = new S3Client({
 
 
 app.post("/subida", function(req, res){
-  let bucket = "bucket-avatar";
-  let carpetaInternaBucket = "imagenes/miavatar.jpg";
+  let bucket = "almacenamiento74";
+  let carpetaInternaBucket = "miavatar.jpg";
   let urlImagen = "https://" + bucket + ".s3." + miRegion + ".amazonaws.com/" + carpetaInternaBucket; // ruta de imagen
   // Multer
   const storage = multer.memoryStorage(); // multer almacena el archivo de forma temporal.
@@ -54,11 +54,11 @@ app.post("/subida", function(req, res){
       const command = new PutObjectCommand(params);
       await s3.send(command)
       .then(response => {
-        return res.status(200).json({urlImagen: urlImagen, mensaje: "archivo subido correctamente"});
+        return res.status(200).json({urlImagen: urlImagen, mensaje: "Archivo subido correctamente"});
       })
       .catch((error) =>{
         console.log("error al ejecutar send, ", error);
-        return res.status(400).json({mensaje: "error al ejecutar comando, por favor intentar nuevamente"});
+        return res.status(400).json({mensaje: "Error al ejecutar comando, por favor intentar nuevamente"});
       });
     }
   });
@@ -87,39 +87,7 @@ app.post("/eliminar", function(req, res){
 
 
 
-
-
-
 // AWS S3 ///////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Todas las peticiones GET que no hayamos manejado en las líneas anteriores retornaran nuestro app React
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
